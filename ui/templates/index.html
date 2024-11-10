@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Code Translation Pipeline Configuration</title>
+</head>
+<body>
+    <h1>Configure Translation Pipeline</h1>
+    <form method="post">
+        <h2>Source Repository Details</h2>
+        <label for="source_repo">GitHub URL:</label><br>
+        <input type="text" id="source_repo" name="source_repo" required><br>
+        <label for="source_branch">Branch Name:</label><br>
+        <input type="text" id="source_branch" name="source_branch" required><br>
+        <label for="source_auth">Authentication Token:</label><br>
+        <input type="text" id="source_auth" name="source_auth"><br>
+
+        <h2>Destination Repository Details</h2>
+        <label for="dest_repo">GitLab/GitHub URL:</label><br>
+        <input type="text" id="dest_repo" name="dest_repo" required><br>
+        <label for="dest_branch">Branch Name:</label><br>
+        <input type="text" id="dest_branch" name="dest_branch" required><br>
+        <label for="dest_auth">Authentication Token:</label><br>
+        <input type="text" id="dest_auth" name="dest_auth"><br><br>
+
+        <input type="submit" value="Start Translation">
+    </form>
+</body>
+</html>

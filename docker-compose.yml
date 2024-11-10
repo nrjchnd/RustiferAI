@@ -1,0 +1,59 @@
+version: '3.8'
+services:
+  ui:
+    build: ./ui
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://user:password@db:5432/translation
+    depends_on:
+      - db
+
+  db:
+    image: postgres:13
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=translation
+
+  worker:
+    build: ./worker
+    environment:
+      - DATABASE_URL=postgresql://user:password@db:5432/translation
+      - OLLAMA_API_URL=http://ollama:11434
+      - VECTOR_DB_URL=http://vector_db:8001
+    depends_on:
+      - db
+      - ollama
+      - vector_db
+
+  ollama:
+    build: ./models/ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+
+  vector_db:
+    build: ./vector_db
+    ports:
+      - "8001:8001"
+    volumes:
+      - vector_db_data:/app/data
+
+  gitlab:
+    image: gitlab/gitlab-ce:latest
+    ports:
+      - "8929:80"
+    volumes:
+      - gitlab_data:/var/opt/gitlab
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+
+volumes:
+  db_data:
+  ollama_data:
+  vector_db_data:
+  gitlab_data:
