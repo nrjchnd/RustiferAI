@@ -42,6 +42,8 @@ services:
       - "8001:8001"
     volumes:
       - vector_db_data:/app/data
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
 
   gitlab:
     image: gitlab/gitlab-ce:latest
@@ -49,8 +51,7 @@ services:
       - "8929:80"
     volumes:
       - gitlab_data:/var/opt/gitlab
-    environment:
-      - OPENAI_API_KEY=${OPENAI_API_KEY}
+
 
 volumes:
   db_data:
