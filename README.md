@@ -14,8 +14,7 @@ This project provides a reusable, automated pipeline to translate any C/C++ GitH
 
 ### 1. Clone the Repository
 
-```bash
-git clone https://github.com/yourusername/translation-pipeline.git
+git clone https://github.com/nrjchnd/translation-pipeline.git
 cd translation-pipeline
 
 source scripts/setup_env.sh
@@ -68,29 +67,12 @@ Translation errors: Check the logs for the worker service to identify issues.
 
 ### Additional Considerations**
 
-- **Model Selection in Ollama:**
-  - The `translate_code` function in `translate.py` specifies `"model": "llama2"`.
-  - Ensure that the Llama 2 model is downloaded and available in Ollama.
-
-- **Downloading Models with Ollama:**
-  - Use the Ollama CLI to download models before starting the service.
-  - Example:
-    ollama pull llama2
-
 - **Entrypoint Script Adjustments:**
   - The `entrypoint.sh` script in the Ollama service ensures the Ollama server starts when the container runs.
-
----
-
-- **API Usage:**
-  - Ollama provides a REST API for interaction.
-  - The `translate_code` function in `translate.py` has been updated to use this API, sending prompts and receiving responses accordingly.
 
 - **Security and Privacy:**
   - Running LLMs locally ensures that the source code does not leave the local environment.
   - This is particularly important for proprietary or sensitive codebases.
-
----
 
 ### Testing the Updated Pipeline**
 
@@ -108,19 +90,15 @@ Translation errors: Check the logs for the worker service to identify issues.
 
 **Next Steps:**
 
-1. **Set Up Ollama:**
-   - Ensure that Ollama is correctly installed and configured in the Docker environment.
-   - Download the necessary LLMs using the Ollama CLI.
-
-2. **Run the Pipeline:**
+1. **Run the Pipeline:**
    - Start the services using the updated `start.sh` script.
    - Use the UI to initiate a translation job.
 
-3. **Monitor and Adjust:**
+2. **Monitor and Adjust:**
    - Monitor the translation process.
    - If needed, adjust the translation prompts or model parameters to improve results.
 
-4. **Scale and Optimize:**
+3. **Scale and Optimize:**
    - Consider scaling the worker service if translating large repositories.
    - Optimize resource allocation in Docker to ensure efficient performance.
 
